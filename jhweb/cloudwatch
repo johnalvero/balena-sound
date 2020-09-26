@@ -1,0 +1,12 @@
+#!/bin/bash
+
+MACHINE=$(hostname)
+
+#!/bin/bash
+while :
+do
+	echo "Press [CTRL+C] to stop.."
+	sleep $mSLEEP
+	mVALUE=$(curl -so /dev/null -w $curl_METRIC $mURL)
+	$(which aws) cloudwatch put-metric-data --metric-name $METRIC_NAME --value $mVALUE --unit $METRIC_UNIT --namespace $METRIC_NAMESPACE --dimensions InstanceId=$MACHINE
+done
