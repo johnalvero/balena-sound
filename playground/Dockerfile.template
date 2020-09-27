@@ -1,0 +1,12 @@
+FROM balenalib/%%BALENA_MACHINE_NAME%%:bullseye
+
+ENV DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
+ENV UDEV=1
+
+RUN install_packages \
+  awscli nginx
+
+RUN echo "hello world" > /var/www/html/index.html
+
+CMD ["nginx", "-g", "daemon off;"]
+#CMD [ "tail", "-f", "/dev/null" ]
